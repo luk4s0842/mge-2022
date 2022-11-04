@@ -4,16 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-//@Entity
-//class Artist {
-//    @PrimaryKey (autoGenerate = true)
-//    private val id: Int
-//
-//    @ColumnInfo
-//    public var name: String
-//
-//    @ColumnInfo
-//    public var description: String
-//
-//    public var picture_link: String? = null
-//}
+@Entity
+data class Artist (
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    @ColumnInfo(name = "name") val name: String?,
+    @ColumnInfo(name = "description") val description: String?,
+    @ColumnInfo(name = "picture_link") val pictureLink: String?
+)

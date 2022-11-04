@@ -4,13 +4,16 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import com.habeggerdomeisenjoos.mge_2022.model.Artist
 
-//@Dao
-//interface ArtistsDao {
-////    @Query("SELECT * FROM artist")
-////    public getEntries() : List<Artist>
-//
-//    @Insert
-//
-//    @Delete
-//}
+@Dao
+interface ArtistsDao {
+    @Query("SELECT * FROM artist")
+    fun getAll(): List<Artist>
+
+    @Insert
+    fun insertAll(vararg artists: Artist)
+
+    @Delete
+    fun delete(artist: Artist)
+}
