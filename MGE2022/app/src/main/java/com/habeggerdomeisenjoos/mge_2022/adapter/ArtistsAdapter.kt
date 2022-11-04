@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.habeggerdomeisenjoos.mge_2022.R
 
-class ArtistAdapter(private val artists: Array<String>) : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>() {
+class ArtistsAdapter(private val artists: Array<String>) : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>() {
 
 
     class ArtistViewHolder(view: View) : RecyclerView.ViewHolder(view) {

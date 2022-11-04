@@ -5,12 +5,12 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
-@Dao
-interface ArtistsDao {
-    @Query("SELECT * FROM artist")
-    public getEntries() : List<Artist>
-
-    @Insert
-
-    @Delete
-}
+//@Dao
+//interface ArtistsDao {
+////    @Query("SELECT * FROM artist")
+////    public getEntries() : List<Artist>
+//
+//    @Insert
+//
+//    @Delete
+//}
