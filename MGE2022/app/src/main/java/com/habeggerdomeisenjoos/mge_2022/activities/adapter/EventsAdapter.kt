@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.habeggerdomeisenjoos.mge_2022.R
 import com.habeggerdomeisenjoos.mge_2022.activities.model.Event
 import com.squareup.picasso.Picasso
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 
 class EventsAdapter(private val events: ArrayList<Event>) : RecyclerView.Adapter<EventsAdapter.EventViewHolder>() {
@@ -23,7 +25,10 @@ class EventsAdapter(private val events: ArrayList<Event>) : RecyclerView.Adapter
             titleView.text = event.title
             artistView.text = event.artistName
             locationView.text = event.location
-            datetimeView.text = event.datetime.toString()
+
+            var formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy")
+            datetimeView.text = event.datetime.format(formatter)
+
             Picasso.get().load(event.imageUrl).into(imageView)
         }
     }
