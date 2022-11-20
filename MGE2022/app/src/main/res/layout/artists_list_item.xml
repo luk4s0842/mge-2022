@@ -19,10 +19,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/artist_list_item_title"
+            android:id="@+id/artist_list_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="title"
+            android:text="name"
             app:layout_constraintStart_toEndOf="@+id/artist_list_item_picture"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,8 +30,8 @@
             android:id="@+id/artist_list_item_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/artist_list_item_title"
-            app:layout_constraintTop_toBottomOf="@id/artist_list_item_title"
+            app:layout_constraintStart_toStartOf="@id/artist_list_item_name"
+            app:layout_constraintTop_toBottomOf="@id/artist_list_item_name"
             android:text="description"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
