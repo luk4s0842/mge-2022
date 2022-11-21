@@ -44,6 +44,15 @@ class BottomNavigationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        var activityNavId = hashMapOf(
+            "activities.ConcertsActivity" to R.id.navbar_events,
+            "activities.ArtistsActivity" to R.id.navbar_artists,
+            "activities.SettingsActivity" to R.id.navbar_settings
+        )
+        var activityName = activity?.localClassName
+        bottomNav.selectedItemId = activityNavId[activityName]!!
+
         bottomNav?.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navbar_artists -> {

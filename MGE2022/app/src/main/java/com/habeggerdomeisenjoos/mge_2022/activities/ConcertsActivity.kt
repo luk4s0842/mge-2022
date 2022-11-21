@@ -21,7 +21,7 @@ class ConcertsActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         var artist = Artist("Test", "K8vZ9171oZf")
-        TMApiWrapper.getInstance(this).getEvents(artist) { events: ArrayList<Event> ->
+        TMApiWrapper.getInstance(this).getEventsFromArtist(artist) { events: ArrayList<Event> ->
             val adapter = EventsAdapter(events)
             recyclerView.adapter = adapter
         }

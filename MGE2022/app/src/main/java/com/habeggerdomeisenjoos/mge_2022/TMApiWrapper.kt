@@ -16,6 +16,9 @@ class TMApiWrapper { // static class or singleton
     companion object {
         private const val API_VERSION: String = "v2"
 
+        //Resources
+        private const val API_RESOURCE_EVENTS: String = "events"
+
         //packages
         private const val API_PACKAGE_DISCOVERY: String = "discovery"
         private const val API_KEY: String = "1I9lI5tLamHXGMY1IDXiZaVS1IcGnpDV"
@@ -25,11 +28,27 @@ class TMApiWrapper { // static class or singleton
         private const val API_PARAM_TICKETSOURCE: String = "source"
         private const val API_PARAM_COUNTRYCODE: String = "countryCode"
         private const val API_PARAM_CLASSIFICATIONNAME: String = "classificationName"
+        private const val API_PARAM_RADIUS: String = "radius"
+        private const val API_PARAM_UNIT: String = "unit"
 
         // possible values for API param classificationName
         private const val API_CLASSIFICATIONNAME_VALUE_MUSIC: String = "music"
-        private const val API_CLASSIFICATIONNAME_VALUE_FILM: String = "film"
-        private val BASE_URL: String = "https://app.ticketmaster.com/$API_PACKAGE_DISCOVERY/$API_VERSION/{resource}.json?apikey=$API_KEY"
+
+        private const val BASE_URL: String = "https://app.ticketmaster.com/$API_PACKAGE_DISCOVERY/$API_VERSION/{resource}.json?apikey=$API_KEY"
+
+        // JSON Identifiers from API response
+        private const val API_RESPONSE_EMBEDDED: String = "_embedded"
+        private const val API_RESPONSE_EVENTS: String = "events"
+        private const val API_RESPONSE_VENUES: String = "venues"
+        private const val API_RESPONSE_ADDRESS: String = "address"
+        private const val API_RESPONSE_LINE1: String = "line1"
+        private const val API_RESPONSE_DATES: String = "dates"
+        private const val API_RESPONSE_START: String = "start"
+        private const val API_RESPONSE_DATETIME: String = "dateTime"
+        private const val API_RESPONSE_IMAGES: String = "images"
+        private const val API_RESPONSE_URL: String = "url"
+        private const val API_RESPONSE_NAME: String = "name"
+        private const val API_RESPONSE_ATTRACTIONS: String = "attractions"
 
         private lateinit var queue: RequestQueue
         private var INSTANCE: TMApiWrapper? = null
@@ -48,17 +67,6 @@ class TMApiWrapper { // static class or singleton
         frontGate,
         ticketmaster_resale,
     }
-    enum class classificationNames { //not sure if that works, example very bad
-        music,
-        film,
-    }
-
-    private fun createRequestUrl(
-        sources: List<ticketSources>? = null,
-        countryCode: String? = null,
-        classificationName: classificationNames? = null){
-    }
-
 
     private fun makeRequest(resource: String, params: HashMap<String, String>, onResponse: Response.Listener<JSONObject>) {
         var paramsStr = params.entries.stream()
@@ -85,41 +93,64 @@ class TMApiWrapper { // static class or singleton
         }
     }
 
-    fun getEvents(artist: Artist, callback: (events: ArrayList<Event>) -> Unit) {
-        var params = hashMapOf("attractionId" to artist.id)
+    fun getEventsFromArtist(artist: Artist, callback: (events: ArrayList<Event>) -> Unit) {
+        val params = hashMapOf("attractionId" to artist.id)
+        getEvents(params, callback)
+    }
 
-        makeRequest("events", params) { response ->
+    fun getAllEvents(callback: (events: ArrayList<Event>) -> Unit) {
+        val params = hashMapOf(
+            API_PARAM_RADIUS to Settings.getInstance().radius.toString(),
+            API_PARAM_UNIT to Settings.getInstance().unit,
+            API_PARAM_CLASSIFICATIONNAME to API_CLASSIFICATIONNAME_VALUE_MUSIC,
+        )
+        getEvents(params, callback)
+    }
+
+    private fun getEvents(params: HashMap<String, String>, callback: (events: ArrayList<Event>) -> Unit) {
+        makeRequest(API_RESOURCE_EVENTS, params) { response ->
             val events = ArrayList<Event>()
-            val eventsJSON = response.getJSONObject("_embedded").getJSONArray("events")
+            val eventsJson = response.getJSONObject(API_RESPONSE_EMBEDDED).getJSONArray(API_RESPONSE_EVENTS)
 
-            for (i in 0 until eventsJSON.length()) {
-                val eventJSON = eventsJSON.getJSONObject(i)
-                val location = eventJSON
-                    .getJSONObject("_embedded")
-                    .getJSONArray("venues")
+            for (i in 0 until eventsJson.length()) {
+                val eventJson = eventsJson.getJSONObject(i)
+
+                val location = eventJson
+                    .getJSONObject(API_RESPONSE_EMBEDDED)
+                    .getJSONArray(API_RESPONSE_VENUES)
                     .getJSONObject(0)
-                    .getJSONObject("address")
-                    .getString("line1")
+                    .getJSONObject(API_RESPONSE_ADDRESS)
+                    .getString(API_RESPONSE_LINE1)
 
-                val dateStr = eventJSON
-                    .getJSONObject("dates")
-                    .getJSONObject("start")
-                    .getString("dateTime")
+                val dateStr = eventJson
+                    .getJSONObject(API_RESPONSE_DATES)
+                    .getJSONObject(API_RESPONSE_START)
+                    .getString(API_RESPONSE_DATETIME)
 
-                val image = eventJSON
-                    .getJSONArray("images")
+                val image = eventJson
+                    .getJSONArray(API_RESPONSE_IMAGES)
                     .getJSONObject(1)
-                    .getString("url")
+                    .getString(API_RESPONSE_URL)
+
+                val artistName = eventJson
+                    .getJSONObject(API_RESPONSE_EMBEDDED)
+                    .getJSONArray(API_RESPONSE_ATTRACTIONS)
+                    .getJSONObject(0)
+                    .getString(API_RESPONSE_NAME)
+
+                val name = eventJson.getString(API_RESPONSE_NAME)
+                val date = LocalDateTime.parse(dateStr.substring(0, dateStr.length-1))
 
                 val event = Event(
-                    eventJSON.getString("name"),
-                    artist.name,
+                    name,
+                    artistName,
                     location,
-                    LocalDateTime.parse(dateStr.substring(0, dateStr.length-1)),
+                    date,
                     image,
                 )
                 events.add(event)
             }
+
             callback(events)
         }
     }
