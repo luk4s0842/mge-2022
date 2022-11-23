@@ -115,8 +115,8 @@ class TMApiWrapper { // static class or singleton
 
     private fun getEventParams(page: Int): HashMap<String, String> {
         return hashMapOf(
-            API_PARAM_RADIUS to Settings.getInstance().radius.toString(),
-            API_PARAM_UNIT to Settings.getInstance().unit,
+            API_PARAM_RADIUS to SettingsHandler.getInstance().radius.toString(),
+            API_PARAM_UNIT to SettingsHandler.getInstance().unit,
             API_PARAM_CLASSIFICATIONNAME to API_CLASSIFICATIONNAME_VALUE_MUSIC,
             API_PARAM_PAGE to page.toString(),
         )
