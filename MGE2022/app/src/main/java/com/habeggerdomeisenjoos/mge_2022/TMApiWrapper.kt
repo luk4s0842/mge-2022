@@ -18,6 +18,7 @@ class TMApiWrapper { // static class or singleton
 
         //Resources
         private const val API_RESOURCE_EVENTS: String = "events"
+        private const val API_RESOURCE_ATTRACTION: String = "attractions"
 
         //packages
         private const val API_PACKAGE_DISCOVERY: String = "discovery"
@@ -27,8 +28,9 @@ class TMApiWrapper { // static class or singleton
         private const val API_PARAM_CLASSIFICATIONNAME: String = "classificationName"
         private const val API_PARAM_RADIUS: String = "radius"
         private const val API_PARAM_UNIT: String = "unit"
-        private const val API_PARAM_ATTRACTIONID = "attractionId"
-        private const val API_PARAM_PAGE = "page"
+        private const val API_PARAM_ATTRACTIONID: String = "attractionId"
+        private const val API_PARAM_PAGE: String = "page"
+        private const val API_PARAM_KEYWORD: String = "keyword"
 
         // possible values for API param classificationName
         private const val API_CLASSIFICATIONNAME_VALUE_MUSIC: String = "music"
@@ -48,6 +50,7 @@ class TMApiWrapper { // static class or singleton
         private const val API_RESPONSE_URL: String = "url"
         private const val API_RESPONSE_NAME: String = "name"
         private const val API_RESPONSE_ATTRACTIONS: String = "attractions"
+        private const val API_RESPONSE_ID: String = "id"
 
         private var eventsPage: Int = 0
 
@@ -63,25 +66,25 @@ class TMApiWrapper { // static class or singleton
     }
 
     private fun makeRequest(resource: String, params: HashMap<String, String>, onResponse: Response.Listener<JSONObject>) {
-        var paramsStr = params.entries.stream()
+        val paramsStr = params.entries.stream()
             .map { e: Map.Entry<String, String> -> e.key + "=" + e.value }
             .toArray()
             .joinToString("&")
-        var url = BASE_URL.replace("{resource}", resource) + "&" + paramsStr
+        val url = BASE_URL.replace("{resource}", resource) + "&" + paramsStr
 
         val request = JsonObjectRequest(Request.Method.GET, url, null, onResponse, { println("an error occured") })
         queue.add(request)
     }
 
     fun searchArtists(query: String, callback: (artists: ArrayList<Artist>) -> Unit) {
-        var params = hashMapOf("keyword" to query)
-        makeRequest("attractions", params) { response ->
+        val params = hashMapOf(API_PARAM_KEYWORD to query)
+        makeRequest(API_RESOURCE_ATTRACTION, params) { response ->
             val artists = ArrayList<Artist>()
-            val artistsJSON = response.getJSONObject("_embedded").getJSONArray("attractions")
+            val artistsJSON = response.getJSONObject(API_RESPONSE_EMBEDDED).getJSONArray(API_RESPONSE_ATTRACTIONS)
 
             for (i in 0 until artistsJSON.length()) {
                 val artist = artistsJSON.getJSONObject(i)
-                artists.add(Artist(artist.getString("name"), artist.getString("id")))
+                artists.add(Artist(artist.getString(API_RESPONSE_NAME), artist.getString(API_RESPONSE_ID)))
             }
             callback(artists)
         }
