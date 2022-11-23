@@ -109,10 +109,6 @@ class TMApiWrapper { // static class or singleton
         eventsPage += 1
     }
 
-    fun getEventDetails(event: Event, callback: (events: ArrayList<Event>) -> Unit) {
-        //TODO
-    }
-
     private fun getEventParams(page: Int): HashMap<String, String> {
         return hashMapOf(
             API_PARAM_RADIUS to Settings.getInstance().radius.toString(),
