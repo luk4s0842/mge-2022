@@ -52,12 +52,13 @@ class TMApiWrapper { // static class or singleton
         private var eventsPage: Int = 0
 
         private lateinit var queue: RequestQueue
-        private var INSTANCE: TMApiWrapper? = null
+        private var instance: TMApiWrapper? = null
 
 
-        fun getInstance(context: Context): TMApiWrapper = INSTANCE ?: synchronized(this) {
+        fun getInstance(context: Context): TMApiWrapper = instance ?: synchronized(this) {
             queue = Volley.newRequestQueue(context.applicationContext)
-            return TMApiWrapper()
+            instance = TMApiWrapper()
+            return instance as TMApiWrapper
         }
     }
 

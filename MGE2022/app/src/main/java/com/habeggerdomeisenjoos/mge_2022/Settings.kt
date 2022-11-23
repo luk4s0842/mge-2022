@@ -10,10 +10,11 @@ class Settings private constructor() {
         private val DEFAULT_RADIUS: Int = 100
 
         // Singleton
-        private var INSTANCE: Settings? = null
+        private var instance: Settings? = null
 
-        fun getInstance(): Settings = INSTANCE ?: synchronized(this) {
-            return Settings()
+        fun getInstance(): Settings = instance ?: synchronized(this) {
+            instance = Settings()
+            return instance as Settings
         }
     }
 
