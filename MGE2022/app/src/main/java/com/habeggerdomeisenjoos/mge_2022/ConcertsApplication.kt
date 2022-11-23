@@ -10,5 +10,6 @@ class ConcertsApplication : Application() {
 
         val context: Context = applicationContext
         AppRepository.initialize(this)
+        SettingsHandler.getInstance().load(this)
     }
 }
