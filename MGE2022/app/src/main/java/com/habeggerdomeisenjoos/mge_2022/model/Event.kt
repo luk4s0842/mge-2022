@@ -1,4 +1,4 @@
-package com.habeggerdomeisenjoos.mge_2022.activities.model
+package com.habeggerdomeisenjoos.mge_2022.model
 
 import java.time.LocalDateTime
 

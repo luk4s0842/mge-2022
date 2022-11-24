@@ -1,4 +1,4 @@
-package com.habeggerdomeisenjoos.mge_2022.activities.adapter
+package com.habeggerdomeisenjoos.mge_2022.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.habeggerdomeisenjoos.mge_2022.R
-import com.habeggerdomeisenjoos.mge_2022.activities.model.Event
+import com.habeggerdomeisenjoos.mge_2022.model.Event
 import com.squareup.picasso.Picasso
 import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 
 class EventsAdapter(private val events: ArrayList<Event>) : RecyclerView.Adapter<EventsAdapter.EventViewHolder>() {

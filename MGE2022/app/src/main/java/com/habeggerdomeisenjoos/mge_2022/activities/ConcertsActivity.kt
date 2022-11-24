@@ -6,10 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.habeggerdomeisenjoos.mge_2022.R
 import com.habeggerdomeisenjoos.mge_2022.TMApiWrapper
-import com.habeggerdomeisenjoos.mge_2022.activities.adapter.EventsAdapter
+import com.habeggerdomeisenjoos.mge_2022.adapter.EventsAdapter
 import com.habeggerdomeisenjoos.mge_2022.activities.model.Artist
-import com.habeggerdomeisenjoos.mge_2022.activities.model.Event
-import java.time.LocalDateTime
+import com.habeggerdomeisenjoos.mge_2022.model.Event
 
 
 class ConcertsActivity : AppCompatActivity() {

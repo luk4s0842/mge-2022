@@ -7,7 +7,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.habeggerdomeisenjoos.mge_2022.activities.model.Artist
-import com.habeggerdomeisenjoos.mge_2022.activities.model.Event
+import com.habeggerdomeisenjoos.mge_2022.model.Event
 import org.json.JSONArray
 import org.json.JSONObject
 import java.time.LocalDateTime
