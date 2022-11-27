@@ -8,7 +8,6 @@ class ConcertsApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val context: Context = applicationContext
         AppRepository.initialize(this)
     }
 }

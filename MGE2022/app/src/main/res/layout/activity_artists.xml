@@ -17,6 +17,16 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/artists_add_artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/artists_list"
+        app:layout_constraintEnd_toEndOf="@+id/artists_list"
+        app:srcCompat="@drawable/plus_icon"
+        app:tint="@color/black"/>
+
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/bottom_nav_container"
         android:name="com.habeggerdomeisenjoos.mge_2022.activities.BottomNavigationFragment"
