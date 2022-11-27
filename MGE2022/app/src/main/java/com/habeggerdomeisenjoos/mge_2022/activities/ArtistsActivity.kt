@@ -11,8 +11,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.habeggerdomeisenjoos.mge_2022.R
 import com.habeggerdomeisenjoos.mge_2022.adapter.ArtistsAdapter
 import com.habeggerdomeisenjoos.mge_2022.model.AppRepository
+import com.habeggerdomeisenjoos.mge_2022.model.Artist
 
 class ArtistsActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_artists)

@@ -10,6 +10,6 @@ data class Artist (
     @ColumnInfo(name = "tmId") val tmId: Int?,
     @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "description") val description: String?,
-    @ColumnInfo(name = "picture_link") val pictureUrl: String?
+    @ColumnInfo(name = "picture-URL") val pictureUrl: String?
 ) {
 }
