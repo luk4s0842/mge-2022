@@ -11,7 +11,7 @@ import com.habeggerdomeisenjoos.mge_2022.R
 import com.habeggerdomeisenjoos.mge_2022.model.Artist
 import com.squareup.picasso.Picasso
 
-class ArtistsAdapter(private val artists: List<Artist>) : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>() {
+class ArtistsAdapter(private val artists: ArrayList<Artist>) : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>() {
 
     class ArtistViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val picture: ImageView
