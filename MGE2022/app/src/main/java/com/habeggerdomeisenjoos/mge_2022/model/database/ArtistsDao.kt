@@ -12,7 +12,7 @@ interface ArtistsDao {
     fun getAllArtists(): List<Artist>
 
     @Query("SELECT tmId FROM artist")
-    fun getAllTmIds(): List<Int>
+    fun getAllTmIds(): List<String>
 
     @Insert
     fun insertAll(vararg artists: Artist)

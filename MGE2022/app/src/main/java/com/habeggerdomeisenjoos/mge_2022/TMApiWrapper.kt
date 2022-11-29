@@ -6,7 +6,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.habeggerdomeisenjoos.mge_2022.activities.model.Artist
+import com.habeggerdomeisenjoos.mge_2022.model.Artist
 import com.habeggerdomeisenjoos.mge_2022.model.Event
 import org.json.JSONArray
 import org.json.JSONObject
@@ -31,6 +31,8 @@ class TMApiWrapper { // static class or singleton
         private const val API_PARAM_ATTRACTIONID: String = "attractionId"
         private const val API_PARAM_PAGE: String = "page"
         private const val API_PARAM_KEYWORD: String = "keyword"
+        private const val API_PARAM_SEGMENT: String = "segmentId"
+        private const val API_PARAM_SEGMENT_VALUE: String = "KZFzniwnSyZfZ7v7nJ" // this segment id is for: Music
 
         // possible values for API param classificationName
         private const val API_CLASSIFICATIONNAME_VALUE_MUSIC: String = "music"
@@ -77,23 +79,32 @@ class TMApiWrapper { // static class or singleton
     }
 
     fun searchArtists(query: String, callback: (artists: ArrayList<Artist>) -> Unit) {
-        val params = hashMapOf(API_PARAM_KEYWORD to query)
+        val params = hashMapOf(API_PARAM_KEYWORD to query, API_PARAM_SEGMENT to API_PARAM_SEGMENT_VALUE)
         makeRequest(API_RESOURCE_ATTRACTION, params) { response ->
             val artists = ArrayList<Artist>()
             val artistsJSON = response.getJSONObject(API_RESPONSE_EMBEDDED).getJSONArray(API_RESPONSE_ATTRACTIONS)
 
             for (i in 0 until artistsJSON.length()) {
                 val artist = artistsJSON.getJSONObject(i)
-                artists.add(Artist(artist.getString(API_RESPONSE_NAME), artist.getString(API_RESPONSE_ID)))
+                val artistImage = artist.getJSONArray(API_RESPONSE_IMAGES).getString(0)
+                artists.add(Artist(
+                    artist.getString(API_RESPONSE_ID),
+                    artist.getString(API_RESPONSE_NAME),
+                    "TODO",
+                    artistImage
+                ))
             }
             callback(artists)
         }
     }
 
     fun getEventsFromArtist(artist: Artist, callback: (events: ArrayList<Event>) -> Unit) {
-        val params = hashMapOf(API_PARAM_ATTRACTIONID to artist.id)
-        getEvents(params, callback)
+        if (artist.tmId != null) {
+            val params = hashMapOf(API_PARAM_ATTRACTIONID to artist.tmId)
+            getEvents(params, callback)
+        }
     }
+
 
     fun getAllEvents(reset_page: Boolean = false, callback: (events: ArrayList<Event>) -> Unit) {
         if (reset_page) {
@@ -171,6 +182,10 @@ class TMApiWrapper { // static class or singleton
 
     private fun getEventsJson(params: HashMap<String, String>, callback: (eventsJson: JSONArray) -> Unit) {
         makeRequest(API_RESOURCE_EVENTS, params) { response ->
+            var eventsCount = response.getJSONObject("page").getInt("totalElements")
+            if (eventsCount == 0) {
+                return@makeRequest
+            }
             val eventsJson = response.getJSONObject(API_RESPONSE_EMBEDDED).getJSONArray(API_RESPONSE_EVENTS)
             callback(eventsJson)
         }

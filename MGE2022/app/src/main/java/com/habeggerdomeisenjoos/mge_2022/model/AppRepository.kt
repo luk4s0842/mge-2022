@@ -13,8 +13,9 @@ class AppRepository {
                 .allowMainThreadQueries()
                 .build();
 
+            database.artistDao().delete(getArtists()[0])
             if (getArtists().isEmpty()) {
-                addArtist(1223, "Peter Fox", "Er ist ein talentierter Sänger", "https://images.berliner-kurier.de/2022/10/21/3ac5c065-818e-4928-bbb1-6b88e665494d.jpeg?rect=0%2C3%2C2048%2C1365&w=1024&auto=format")
+                addArtist("K8vZ917GqdV", "Peter Fox", "Er ist ein talentierter Sänger", "https://images.berliner-kurier.de/2022/10/21/3ac5c065-818e-4928-bbb1-6b88e665494d.jpeg?rect=0%2C3%2C2048%2C1365&w=1024&auto=format")
             }
         }
 
@@ -22,11 +23,11 @@ class AppRepository {
             return database.artistDao().getAllArtists()
         }
 
-        fun getAllTmIds() : List<Int> {
+        fun getAllTmIds() : List<String> {
             return database.artistDao().getAllTmIds()
         }
 
-        fun addArtist(tmId: Int, name: String, description: String, picture_link: String) {
+        fun addArtist(tmId: String, name: String, description: String, picture_link: String) {
             val artist = Artist(tmId, name, description, picture_link)
             database.artistDao().insert(artist)
         }

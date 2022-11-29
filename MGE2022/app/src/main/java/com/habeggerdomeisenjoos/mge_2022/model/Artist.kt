@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class Artist (
     @PrimaryKey
-    @ColumnInfo(name = "tmId") val tmId: Int?,
+    @ColumnInfo(name = "tmId") val tmId: String,
     @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "description") val description: String?,
     @ColumnInfo(name = "picture_link") val pictureUrl: String?
