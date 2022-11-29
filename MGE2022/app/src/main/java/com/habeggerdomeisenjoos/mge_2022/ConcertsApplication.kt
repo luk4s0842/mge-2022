@@ -9,5 +9,6 @@ class ConcertsApplication : Application() {
         super.onCreate()
 
         AppRepository.initialize(this)
+        SettingsHandler.getInstance().load(this)
     }
 }

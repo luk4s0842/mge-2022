@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">MGE-2022</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings_dark_mode">Dark Mode</string>
+    <string name="settings_max_distance">Maximum distance</string>
+    <string name="settings_units">Units</string>
+    <string name="settings_distance_hint">Distance</string>
+    <string name="settings_file_key">com.habeggerdomeisenjoos.mge_2022.settings</string>
+    <string name="unit_setting_id">unit</string>
+    <string name="radius_setting_id">radius</string>
+    <string name="dark_mode_setting_id">dark_mode</string>
 </resources>
