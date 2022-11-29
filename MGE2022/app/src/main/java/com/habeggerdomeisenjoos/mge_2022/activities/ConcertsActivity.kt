@@ -28,6 +28,5 @@ class ConcertsActivity : AppCompatActivity() {
                 recyclerView.adapter = adapter
             }
         }
-        // var artist = Artist("Test", "K8vZ9171oZf")
     }
 }

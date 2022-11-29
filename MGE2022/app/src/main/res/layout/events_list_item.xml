@@ -26,12 +26,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textAppearance="?attr/textAppearanceHeadlineLarge" />
             <TextView
                 android:id="@+id/event_artist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textAppearance="?attr/textAppearanceHeadlineMedium"/>
 
             <TextView
@@ -39,6 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textAppearance="?attr/textAppearanceHeadlineMedium"/>
 
             <TextView
@@ -46,6 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textAppearance="?attr/textAppearanceHeadlineMedium"/>
         </LinearLayout>
     </LinearLayout>

@@ -15,7 +15,7 @@ class AppRepository {
 
             database.artistDao().delete(getArtists()[0])
             if (getArtists().isEmpty()) {
-                addArtist("K8vZ917GqdV", "Peter Fox", "Er ist ein talentierter Sänger", "https://images.berliner-kurier.de/2022/10/21/3ac5c065-818e-4928-bbb1-6b88e665494d.jpeg?rect=0%2C3%2C2048%2C1365&w=1024&auto=format")
+                addArtist("K8vZ9171oZf", "Peter Fox", "Er ist ein talentierter Sänger", "https://images.berliner-kurier.de/2022/10/21/3ac5c065-818e-4928-bbb1-6b88e665494d.jpeg?rect=0%2C3%2C2048%2C1365&w=1024&auto=format")
             }
         }
 

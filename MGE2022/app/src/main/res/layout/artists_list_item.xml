@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:text="name"
             app:layout_constraintStart_toEndOf="@+id/artist_list_item_picture"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -32,6 +33,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/artist_list_item_name"
             app:layout_constraintTop_toBottomOf="@id/artist_list_item_name"
+            android:textColor="?android:attr/textColorPrimary"
             android:text="description"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
