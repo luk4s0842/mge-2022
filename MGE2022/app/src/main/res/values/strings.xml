@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">MGE-2022</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="settings_dark_mode">Dark Mode</string>
     <string name="settings_max_distance">Maximum distance</string>
@@ -10,4 +9,6 @@
     <string name="unit_setting_id">unit</string>
     <string name="radius_setting_id">radius</string>
     <string name="dark_mode_setting_id">dark_mode</string>
+    <string name="name">name</string>
+    <string name="description">description</string>
 </resources>
