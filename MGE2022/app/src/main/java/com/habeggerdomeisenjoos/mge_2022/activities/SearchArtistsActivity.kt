@@ -40,8 +40,8 @@ class SearchArtistsActivity : AppCompatActivity() {
 
         // TODO: Remove test data below as soon as TODO on line 34 is done
         // -----------   Test  -----------
-        val artist1 = Artist(22, "Post Malone", "A crazy dude", "https://www.morecore.de/wp-content/uploads/post_malone_saint_tropez_video-scaled.jpg")
-        val artist2 = Artist(24, "Tyga", "Another crazy dude", "https://image.gala.de/22872200/t/K7/v3/w1440/r1/-/tyga.jpg")
+        val artist1 = Artist("22", "Post Malone", "A crazy dude", "https://www.morecore.de/wp-content/uploads/post_malone_saint_tropez_video-scaled.jpg")
+        val artist2 = Artist("24", "Tyga", "Another crazy dude", "https://image.gala.de/22872200/t/K7/v3/w1440/r1/-/tyga.jpg")
         val results = ArrayList<Artist>()
         results.add(artist1)
         results.add(artist2)
