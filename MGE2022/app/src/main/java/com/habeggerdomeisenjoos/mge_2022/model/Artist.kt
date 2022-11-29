@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey
 data class Artist (
     @PrimaryKey
     @ColumnInfo(name = "tmId") val tmId: String,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "description") val description: String,
-    @ColumnInfo(name = "picture-URL") val pictureUrl: String
+    @ColumnInfo(name = "name") val name: String?,
+    @ColumnInfo(name = "description") val description: String?,
+    @ColumnInfo(name = "picture-URL") val pictureUrl: String?
 ) {
 }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.habeggerdomeisenjoos.mge_2022.R
 import com.habeggerdomeisenjoos.mge_2022.TMApiWrapper
 import com.habeggerdomeisenjoos.mge_2022.adapter.ArtistsAdapter
@@ -37,7 +38,6 @@ class SearchArtistsActivity : AppCompatActivity() {
             }
         })
 
-
         // TODO: Remove test data below as soon as TODO on line 34 is done
         // -----------   Test  -----------
         val artist1 = Artist("22", "Post Malone", "A crazy dude", "https://www.morecore.de/wp-content/uploads/post_malone_saint_tropez_video-scaled.jpg")
@@ -49,11 +49,16 @@ class SearchArtistsActivity : AppCompatActivity() {
         // ----------- Test End ----------
     }
 
-    fun updateSearchResults (recyclerView: RecyclerView, results: ArrayList<Artist>){
+    fun updateSearchResults (recyclerView: RecyclerView, results: ArrayList<Artist>) : Boolean{
         if (results.isEmpty()) {
-            // TODO: Snackbar for nothing found
+            Snackbar
+                .make(recyclerView, "Nothing found!", Snackbar.LENGTH_LONG)
+                .show()
+            return false
+        } else {
+            val adapter = SearchResultsAdapter(results)
+            recyclerView.adapter = adapter
+            return true
         }
-        val adapter = SearchResultsAdapter(results)
-        recyclerView.adapter = adapter
     }
 }
