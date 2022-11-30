@@ -15,11 +15,14 @@ import com.habeggerdomeisenjoos.mge_2022.adapter.SearchResultsAdapter
 import com.habeggerdomeisenjoos.mge_2022.model.Artist
 
 class SearchArtistsActivity : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_artists)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.search_artists_list)
+        recyclerView = findViewById<RecyclerView>(R.id.search_artists_list)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val searchBar = findViewById<SearchView>(R.id.search_artists_searchbar)
@@ -30,7 +33,7 @@ class SearchArtistsActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null && newText.isNotEmpty()) {
-                    TMApiWrapper.getInstance().searchArtists(newText){ result -> updateSearchResults(recyclerView, result) }
+                    TMApiWrapper.getInstance().searchArtists(newText){ result -> updateSearchResults(result) }
                     return true
                 }
                 return false
@@ -38,7 +41,7 @@ class SearchArtistsActivity : AppCompatActivity() {
         })
     }
 
-    fun updateSearchResults (recyclerView: RecyclerView, results: ArrayList<Artist>) {
+    fun updateSearchResults (results: ArrayList<Artist>) {
         if (results.isEmpty()) {
             Snackbar
                 .make(recyclerView, "Nothing found!", Snackbar.LENGTH_LONG)
