@@ -1,6 +1,7 @@
 package com.habeggerdomeisenjoos.mge_2022.adapter
 
 import android.content.Intent
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +20,12 @@ class SearchResultsAdapter(private val artists: List<Artist>) : RecyclerView.Ada
     class SearchResultsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView
         val description: TextView
+        val image: ImageView
 
         init {
             name = view.findViewById(R.id.artist_list_item_name)
             description = view.findViewById(R.id.artist_list_item_description)
+            image = view.findViewById(R.id.artist_list_item_picture)
         }
     }
 
@@ -36,6 +39,8 @@ class SearchResultsAdapter(private val artists: List<Artist>) : RecyclerView.Ada
     override fun onBindViewHolder(artistViewHolder: SearchResultsViewHolder, position: Int) {
         artistViewHolder.name.text = artists[position].name
         artistViewHolder.description.text = artists[position].description
+        Picasso.get().load(artists[position].pictureUrl).into(artistViewHolder.image)
+
         artistViewHolder.itemView.setOnClickListener{
             val context = artistViewHolder.itemView.context
             AppRepository.addArtist(artists[position])

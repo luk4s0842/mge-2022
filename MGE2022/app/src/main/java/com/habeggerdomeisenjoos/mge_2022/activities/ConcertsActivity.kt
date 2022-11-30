@@ -20,13 +20,19 @@ class ConcertsActivity : AppCompatActivity() {
         var recyclerView = findViewById<RecyclerView>(R.id.events_list)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        var currentEvents = ArrayList<Event>()
         var artists = AppRepository.getArtists()
         for (artist in artists) {
             println(artist.tmId)
-            TMApiWrapper.getInstance(this).getEventsFromArtist(artist) { events: ArrayList<Event> ->
-                val adapter = EventsAdapter(events)
+            TMApiWrapper.getInstance().getEventsFromArtist(artist) { events: ArrayList<Event> ->
+                currentEvents.addAll(events)
+                val adapter = EventsAdapter(getSortedEvents(currentEvents))
                 recyclerView.adapter = adapter
             }
         }
+    }
+
+    private fun getSortedEvents(events: ArrayList<Event>) : ArrayList<Event> {
+        return ArrayList(events.sortedBy { it.datetime })
     }
 }

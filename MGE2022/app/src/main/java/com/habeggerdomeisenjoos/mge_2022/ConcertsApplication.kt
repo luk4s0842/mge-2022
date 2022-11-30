@@ -10,5 +10,6 @@ class ConcertsApplication : Application() {
 
         AppRepository.initialize(this)
         SettingsHandler.getInstance().load(this)
+        TMApiWrapper.getInstance().load(this)
     }
 }

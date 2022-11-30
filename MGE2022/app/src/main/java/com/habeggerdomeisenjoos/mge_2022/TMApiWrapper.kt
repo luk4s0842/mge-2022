@@ -9,6 +9,7 @@ import com.android.volley.toolbox.Volley
 import com.habeggerdomeisenjoos.mge_2022.model.Artist
 import com.habeggerdomeisenjoos.mge_2022.model.Event
 import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 import java.time.LocalDateTime
 
@@ -53,6 +54,7 @@ class TMApiWrapper { // static class or singleton
         private const val API_RESPONSE_NAME: String = "name"
         private const val API_RESPONSE_ATTRACTIONS: String = "attractions"
         private const val API_RESPONSE_ID: String = "id"
+        private const val API_RESPONSE_CLASSIFICATIONS: String = "classifications"
 
         private var eventsPage: Int = 0
 
@@ -60,11 +62,15 @@ class TMApiWrapper { // static class or singleton
         private var instance: TMApiWrapper? = null
 
 
-        fun getInstance(context: Context): TMApiWrapper = instance ?: synchronized(this) {
-            queue = Volley.newRequestQueue(context.applicationContext)
+        fun getInstance(): TMApiWrapper = instance ?: synchronized(this) {
             instance = TMApiWrapper()
             return instance as TMApiWrapper
         }
+    }
+
+    fun load(context: Context) {
+        queue = Volley.newRequestQueue(context.applicationContext)
+        instance = TMApiWrapper()
     }
 
     private fun makeRequest(resource: String, params: HashMap<String, String>, onResponse: Response.Listener<JSONObject>) {
@@ -81,18 +87,38 @@ class TMApiWrapper { // static class or singleton
     fun searchArtists(query: String, callback: (artists: ArrayList<Artist>) -> Unit) {
         val params = hashMapOf(API_PARAM_KEYWORD to query, API_PARAM_SEGMENT to API_PARAM_SEGMENT_VALUE)
         makeRequest(API_RESOURCE_ATTRACTION, params) { response ->
+            if (!hasElements(response)) {
+                callback(ArrayList())
+                return@makeRequest
+            }
+
             val artists = ArrayList<Artist>()
             val artistsJSON = response.getJSONObject(API_RESPONSE_EMBEDDED).getJSONArray(API_RESPONSE_ATTRACTIONS)
 
             for (i in 0 until artistsJSON.length()) {
-                val artist = artistsJSON.getJSONObject(i)
-                val artistImage = artist.getJSONArray(API_RESPONSE_IMAGES).getString(0)
-                artists.add(Artist(
-                    artist.getString(API_RESPONSE_ID),
-                    artist.getString(API_RESPONSE_NAME),
-                    "TODO",
-                    artistImage
-                ))
+                try {
+                    val artist = artistsJSON.getJSONObject(i)
+
+                    val artistImage = artist
+                        .getJSONArray(API_RESPONSE_IMAGES)
+                        .getJSONObject(0)
+                        .getString(API_RESPONSE_URL)
+
+                    val artistGenre = artist
+                        .getJSONArray(API_RESPONSE_CLASSIFICATIONS)
+                        .getJSONObject(0)
+                        .getJSONObject("genre")
+                        .getString(API_RESPONSE_NAME)
+
+                    artists.add(Artist(
+                        artist.getString(API_RESPONSE_ID),
+                        artist.getString(API_RESPONSE_NAME),
+                        "Genre: $artistGenre",
+                        artistImage
+                    ))
+                } catch (e: JSONException) {
+                    // ignore artist if JSONException occurs
+                }
             }
             callback(artists)
         }
@@ -106,30 +132,29 @@ class TMApiWrapper { // static class or singleton
     }
 
 
-    fun getAllEvents(reset_page: Boolean = false, callback: (events: ArrayList<Event>) -> Unit) {
-        if (reset_page) {
-            eventsPage = 0
-        }
+//    fun getAllEvents(reset_page: Boolean = false, callback: (events: ArrayList<Event>) -> Unit) {
+//        if (reset_page) {
+//            eventsPage = 0
+//        }
+//
+//        val params = getEventParams(eventsPage)
+//
+//        getEvents(params) {events ->
+//            callback(events)
+//        }
+//
+//        eventsPage += 1
+//    }
+//
+//    fun getEventDetails(event: Event, callback: (events: ArrayList<Event>) -> Unit) {
+//        //TODO
+//    }
 
-        val params = getEventParams(eventsPage)
-
-        getEvents(params) {events ->
-            callback(events)
-        }
-
-        eventsPage += 1
-    }
-
-    fun getEventDetails(event: Event, callback: (events: ArrayList<Event>) -> Unit) {
-        //TODO
-    }
-
-    private fun getEventParams(page: Int): HashMap<String, String> {
+    private fun getEventParams(): HashMap<String, String> {
         return hashMapOf(
             API_PARAM_RADIUS to SettingsHandler.getInstance().radius.toString(),
             API_PARAM_UNIT to SettingsHandler.getInstance().unit,
             API_PARAM_CLASSIFICATIONNAME to API_CLASSIFICATIONNAME_VALUE_MUSIC,
-            API_PARAM_PAGE to page.toString(),
         )
     }
 
@@ -138,42 +163,46 @@ class TMApiWrapper { // static class or singleton
 
         getEventsJson(params) { eventsJson ->
             for (i in 0 until eventsJson.length()) {
-                val eventJson = eventsJson.getJSONObject(i)
+                try {
+                    val eventJson = eventsJson.getJSONObject(i)
 
-                val location = eventJson
-                    .getJSONObject(API_RESPONSE_EMBEDDED)
-                    .getJSONArray(API_RESPONSE_VENUES)
-                    .getJSONObject(0)
-                    .getJSONObject(API_RESPONSE_ADDRESS)
-                    .getString(API_RESPONSE_LINE1)
+                    val location = eventJson
+                        .getJSONObject(API_RESPONSE_EMBEDDED)
+                        .getJSONArray(API_RESPONSE_VENUES)
+                        .getJSONObject(0)
+                        .getJSONObject(API_RESPONSE_ADDRESS)
+                        .getString(API_RESPONSE_LINE1)
 
-                val dateStr = eventJson
-                    .getJSONObject(API_RESPONSE_DATES)
-                    .getJSONObject(API_RESPONSE_START)
-                    .getString(API_RESPONSE_DATETIME)
+                    val dateStr = eventJson
+                        .getJSONObject(API_RESPONSE_DATES)
+                        .getJSONObject(API_RESPONSE_START)
+                        .getString(API_RESPONSE_DATETIME)
 
-                val image = eventJson
-                    .getJSONArray(API_RESPONSE_IMAGES)
-                    .getJSONObject(1)
-                    .getString(API_RESPONSE_URL)
+                    val image = eventJson
+                        .getJSONArray(API_RESPONSE_IMAGES)
+                        .getJSONObject(1)
+                        .getString(API_RESPONSE_URL)
 
-                val artistName = eventJson
-                    .getJSONObject(API_RESPONSE_EMBEDDED)
-                    .getJSONArray(API_RESPONSE_ATTRACTIONS)
-                    .getJSONObject(0)
-                    .getString(API_RESPONSE_NAME)
+                    val artistName = eventJson
+                        .getJSONObject(API_RESPONSE_EMBEDDED)
+                        .getJSONArray(API_RESPONSE_ATTRACTIONS)
+                        .getJSONObject(0)
+                        .getString(API_RESPONSE_NAME)
 
-                val name = eventJson.getString(API_RESPONSE_NAME)
-                val date = LocalDateTime.parse(dateStr.substring(0, dateStr.length-1))
+                    val name = eventJson.getString(API_RESPONSE_NAME)
+                    val date = LocalDateTime.parse(dateStr.substring(0, dateStr.length - 1))
 
-                val event = Event(
-                    name,
-                    artistName,
-                    location,
-                    date,
-                    image,
-                )
-                events.add(event)
+                    val event = Event(
+                        name,
+                        artistName,
+                        location,
+                        date,
+                        image,
+                    )
+                    events.add(event)
+                } catch (e: JSONException) {
+                    // ignore event if JSONException occurs
+                }
             }
 
             callback(events)
@@ -181,13 +210,17 @@ class TMApiWrapper { // static class or singleton
     }
 
     private fun getEventsJson(params: HashMap<String, String>, callback: (eventsJson: JSONArray) -> Unit) {
+        params.putAll(getEventParams())
         makeRequest(API_RESOURCE_EVENTS, params) { response ->
-            var eventsCount = response.getJSONObject("page").getInt("totalElements")
-            if (eventsCount == 0) {
-                return@makeRequest
+            if (hasElements(response)) {
+                val eventsJson = response.getJSONObject(API_RESPONSE_EMBEDDED).getJSONArray(API_RESPONSE_EVENTS)
+                callback(eventsJson)
             }
-            val eventsJson = response.getJSONObject(API_RESPONSE_EMBEDDED).getJSONArray(API_RESPONSE_EVENTS)
-            callback(eventsJson)
         }
+    }
+
+    private fun hasElements(apiResponse: JSONObject) : Boolean {
+        val elemCount = apiResponse.getJSONObject("page").getInt("totalElements")
+        return elemCount > 0
     }
 }

@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.widget.addTextChangedListener
+import com.google.android.material.slider.Slider
 import com.habeggerdomeisenjoos.mge_2022.R
 import com.habeggerdomeisenjoos.mge_2022.SettingsHandler
-import com.habeggerdomeisenjoos.mge_2022.model.AppRepository
 
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,11 +60,13 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun initDistanceEditText() {
-        val distanceEditText = findViewById<EditText>(R.id.editTextDistance)
-        distanceEditText.setText(SettingsHandler.getInstance().radius.toString())
-        distanceEditText.addTextChangedListener { control ->
-            val distance = control.toString().toInt()
-            SettingsHandler.getInstance().radius = distance
-        }
+        val distanceEditText = findViewById<Slider>(R.id.editTextDistance)
+        distanceEditText.value = SettingsHandler.getInstance().radius.toFloat()
+
+        distanceEditText.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
+            SettingsHandler.getInstance().radius = value.toInt()
+        })
     }
+
+
 }
