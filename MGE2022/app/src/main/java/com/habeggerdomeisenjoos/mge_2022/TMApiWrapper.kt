@@ -13,6 +13,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.time.LocalDateTime
 
+
 class TMApiWrapper { // static class or singleton
     companion object {
         private const val API_VERSION: String = "v2"
@@ -124,31 +125,16 @@ class TMApiWrapper { // static class or singleton
         }
     }
 
-    fun getEventsFromArtist(artist: Artist, callback: (events: ArrayList<Event>) -> Unit) {
+    fun getEventsFromArtist(latlong: String?, artist: Artist, callback: (events: ArrayList<Event>) -> Unit) {
         if (artist.tmId != null) {
             val params = hashMapOf(API_PARAM_ATTRACTIONID to artist.tmId)
+            if (latlong != null) {
+                println("latlong: $latlong")
+                params["latlong"] = latlong
+            }
             getEvents(params, callback)
         }
     }
-
-
-//    fun getAllEvents(reset_page: Boolean = false, callback: (events: ArrayList<Event>) -> Unit) {
-//        if (reset_page) {
-//            eventsPage = 0
-//        }
-//
-//        val params = getEventParams(eventsPage)
-//
-//        getEvents(params) {events ->
-//            callback(events)
-//        }
-//
-//        eventsPage += 1
-//    }
-//
-//    fun getEventDetails(event: Event, callback: (events: ArrayList<Event>) -> Unit) {
-//        //TODO
-//    }
 
     private fun getEventParams(): HashMap<String, String> {
         return hashMapOf(
