@@ -4,7 +4,7 @@
 Die App soll anstehende Konzerte von eigenen Lieblingskünstlern in einem definierten Umkreis anzeigen.
 
 ## Funktionen
-- Künstler zu Favoritenliste hinzufügen/entfernen
+- Künstler zu Favoritenliste hinzufügen / entfernen
 - Anstehende Konzerte von Künstlern in der Favoritenliste anzeigen
 - Konfiguration des gewünschten Umkreises, in dem nach Konzerten gesucht werden soll
 - Den Darkmode ein- und ausschalten
@@ -22,6 +22,7 @@ Die App soll anstehende Konzerte von eigenen Lieblingskünstlern in einem defini
 <p float="left">
 	<img src="img/events-activity.png" width="280px" />
 	<img src="img/events-dark-activity.png" width="280px" />
+	<img src="img/empty-events-activity.png" width="280px" />
 </p>
 
 
