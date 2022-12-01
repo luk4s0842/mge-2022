@@ -19,21 +19,22 @@ import com.habeggerdomeisenjoos.mge_2022.utils.PermissionsUtils
 
 class ConcertsActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (!PermissionsUtils.hasLocationPermission(this)) {
+        if (PermissionsUtils.hasLocationPermission(this)) {
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            loadEvents()
+        } else {
             requestLocationPermission()
         }
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         setContentView(R.layout.activity_events)
-        
-        var recyclerView = findViewById<RecyclerView>(R.id.events_list)
-        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        loadEvents(recyclerView)
+        recyclerView = findViewById(R.id.events_list)
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     private fun getSortedEvents(events: ArrayList<Event>) : ArrayList<Event> {
@@ -46,27 +47,32 @@ class ConcertsActivity : AppCompatActivity() {
         ) { permissions ->
             when {
                 permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                    // location access granted.
+                    fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+                    loadEvents()
                 } else -> {
-                    // No location access granted.
+                    loadEventsByLocation(null)
                 }
             }
         }
         locationPermissionRequest.launch(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION))
     }
 
-    private fun loadEvents(recyclerView: RecyclerView) {
+    private fun loadEvents() {
         try {
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location : Location? ->
-                    loadEventsByLocation(recyclerView, location)
-                }
+            if (PermissionsUtils.hasLocationPermission(this)) {
+                fusedLocationClient.lastLocation
+                    .addOnSuccessListener { location : Location? ->
+                        loadEventsByLocation(location)
+                    }
+            } else {
+                loadEventsByLocation(null)
+            }
         } catch (e: SecurityException) {
-            loadEventsByLocation(recyclerView, null)
+            loadEventsByLocation(null)
         }
     }
 
-    private fun loadEventsByLocation(recyclerView: RecyclerView, location: Location?) {
+    private fun loadEventsByLocation(location: Location?) {
         var currentEvents = ArrayList<Event>()
         var artists = AppRepository.getArtists()
         for (artist in artists) {
