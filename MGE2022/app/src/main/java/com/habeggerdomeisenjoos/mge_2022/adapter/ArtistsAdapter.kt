@@ -6,13 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
 import com.habeggerdomeisenjoos.mge_2022.R
 import com.habeggerdomeisenjoos.mge_2022.model.Artist
 import com.squareup.picasso.Picasso
 
 class ArtistsAdapter(private val artists: ArrayList<Artist>) : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>() {
-
     class ArtistViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val picture: ImageView
         val name: TextView

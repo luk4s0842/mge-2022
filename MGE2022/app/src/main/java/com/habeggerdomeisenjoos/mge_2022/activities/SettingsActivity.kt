@@ -7,7 +7,6 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.widget.addTextChangedListener
 import com.google.android.material.slider.Slider
 import com.habeggerdomeisenjoos.mge_2022.R
 import com.habeggerdomeisenjoos.mge_2022.SettingsHandler
@@ -67,6 +66,4 @@ class SettingsActivity : AppCompatActivity() {
             SettingsHandler.getInstance().radius = value.toInt()
         })
     }
-
-
 }

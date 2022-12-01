@@ -7,6 +7,4 @@ class Event(
     val artistName: String,
     val location: String,
     val datetime: LocalDateTime,
-    val imageUrl: String) {
-
-}
+    val imageUrl: String)

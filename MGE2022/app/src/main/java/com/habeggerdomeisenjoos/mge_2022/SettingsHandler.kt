@@ -5,10 +5,6 @@ import androidx.appcompat.app.AppCompatDelegate
 
 class SettingsHandler private constructor() {
     companion object {
-        private const val SETTING_DARK_MODE_ID = "dark_mode"
-        private const val SETTING_RADIUS_ID = "radius"
-        private const val SETTING_UNIT_ID = "unit"
-
         private const val UNIT_KM: String = "km"
         private const val UNIT_MILES: String = "miles"
         private const val DEFAULT_UNIT: String = UNIT_KM

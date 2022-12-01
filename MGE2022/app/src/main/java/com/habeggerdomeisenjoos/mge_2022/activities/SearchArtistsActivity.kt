@@ -1,7 +1,5 @@
 package com.habeggerdomeisenjoos.mge_2022.activities
 
-import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,10 +7,8 @@ import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.habeggerdomeisenjoos.mge_2022.R
 import com.habeggerdomeisenjoos.mge_2022.TMApiWrapper
-import com.habeggerdomeisenjoos.mge_2022.adapter.ArtistsAdapter
 import com.habeggerdomeisenjoos.mge_2022.adapter.SearchResultsAdapter
 import com.habeggerdomeisenjoos.mge_2022.model.Artist
 

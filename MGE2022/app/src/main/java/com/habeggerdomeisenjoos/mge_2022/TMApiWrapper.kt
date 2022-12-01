@@ -13,7 +13,6 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.time.LocalDateTime
 
-
 class TMApiWrapper { // static class or singleton
     companion object {
         private const val API_VERSION: String = "v2"
@@ -56,8 +55,7 @@ class TMApiWrapper { // static class or singleton
         private const val API_RESPONSE_ATTRACTIONS: String = "attractions"
         private const val API_RESPONSE_ID: String = "id"
         private const val API_RESPONSE_CLASSIFICATIONS: String = "classifications"
-
-        private var eventsPage: Int = 0
+        private const val API_RESPONSE_TOTAL_ELEMENTS: String = "totalElements"
 
         private lateinit var queue: RequestQueue
         private var instance: TMApiWrapper? = null
@@ -129,7 +127,6 @@ class TMApiWrapper { // static class or singleton
         if (artist.tmId != null) {
             val params = hashMapOf(API_PARAM_ATTRACTIONID to artist.tmId)
             if (latlong != null) {
-                println("latlong: $latlong")
                 params["latlong"] = latlong
             }
             getEvents(params, callback)
@@ -206,7 +203,7 @@ class TMApiWrapper { // static class or singleton
     }
 
     private fun hasElements(apiResponse: JSONObject) : Boolean {
-        val elemCount = apiResponse.getJSONObject("page").getInt("totalElements")
+        val elemCount = apiResponse.getJSONObject(API_PARAM_PAGE).getInt(API_RESPONSE_TOTAL_ELEMENTS)
         return elemCount > 0
     }
 }

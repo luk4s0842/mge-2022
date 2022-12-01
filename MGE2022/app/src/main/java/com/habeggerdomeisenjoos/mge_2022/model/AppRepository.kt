@@ -18,15 +18,6 @@ class AppRepository {
             return ArrayList(database.artistDao().getAllArtists())
         }
 
-        fun getAllTmIds() : ArrayList<String> {
-            return ArrayList(database.artistDao().getAllTmIds())
-        }
-
-        fun addArtist(tmId: String, name: String, description: String, picture_link: String) {
-            val artist = Artist(tmId, name, description, picture_link)
-            database.artistDao().insert(artist)
-        }
-
         fun addArtist(artist: Artist) {
             database.artistDao().insert(artist)
         }
