@@ -46,9 +46,9 @@
             android:id="@+id/editTextDistance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:stepSize="1"
-            android:valueFrom="1"
-            android:valueTo="19999"
+            android:stepSize="5"
+            android:valueFrom="0"
+            android:valueTo="500"
             app:layout_constraintLeft_toRightOf="@id/editTextDistanceLabel"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/switch_dark_mode" />
