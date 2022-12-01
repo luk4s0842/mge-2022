@@ -50,7 +50,8 @@ class ConcertsActivity : AppCompatActivity() {
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissions ->
             when {
-                permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) ||
+                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false)-> {
                     fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
                     loadEvents()
                 } else -> {
@@ -58,7 +59,10 @@ class ConcertsActivity : AppCompatActivity() {
                 }
             }
         }
-        locationPermissionRequest.launch(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION))
+        locationPermissionRequest.launch(arrayOf(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ))
     }
 
     private fun loadEvents() {

@@ -7,8 +7,10 @@ import android.content.pm.PackageManager
 class PermissionsUtils {
     companion object {
         fun hasLocationPermission(context: Context) : Boolean {
-            val status = context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
-            return status == PackageManager.PERMISSION_GRANTED
+            val coarseLocationPermission = context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+            val fineLocationPermission = context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            return coarseLocationPermission == PackageManager.PERMISSION_GRANTED ||
+                    fineLocationPermission == PackageManager.PERMISSION_GRANTED
         }
     }
 }
