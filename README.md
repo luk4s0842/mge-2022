@@ -12,17 +12,17 @@ Die App soll anstehende Konzerte von eigenen Lieblingskünstlern in einem defini
 ## Screenshots
 
 <p float="left">
-	<img src="img/artists-activity.png" width="276px" />
-	<img src="img/search-activity.png" width="276px" />
-	<img src="img/settings-activity.png" width="276px" />
+	<img src="img/artists-activity.png" width="275px" />
+	<img src="img/search-activity.png" width="275px" />
+	<img src="img/settings-activity.png" width="275px" />
 </p>
 
 </br>
 
 <p float="left">
-	<img src="img/events-activity.png" width="276px" />
-	<img src="img/events-dark-activity.png" width="276px" />
-	<img src="img/empty-events-activity.png" width="276px" />
+	<img src="img/events-activity.png" width="275px" />
+	<img src="img/events-dark-activity.png" width="275px" />
+	<img src="img/empty-events-activity.png" width="275px" />
 </p>
 
 
