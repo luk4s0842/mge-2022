@@ -10,7 +10,19 @@ Die App soll anstehende Konzerte von eigenen Lieblingskünstlern in einem defini
 - Den Darkmode ein- und ausschalten
 
 ## Screenshots
-tbd
+
+<p float="left">
+	<img src="img/artists-activity.png" />
+	<img src="img/search-activity.png" />
+	<img src="img/settings-activity.png" />
+</p>
+
+</br>
+
+<p float="left">
+	<img src="img/events-activity.png" />
+	<img src="img/events-dark-activity.png" />
+</p>
 
 
 ## Erwartete Punke
