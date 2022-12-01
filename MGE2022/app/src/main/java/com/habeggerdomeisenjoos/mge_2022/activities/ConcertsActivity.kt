@@ -3,6 +3,8 @@ package com.habeggerdomeisenjoos.mge_2022.activities
 import android.Manifest
 import android.location.Location
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,9 +22,16 @@ import com.habeggerdomeisenjoos.mge_2022.utils.PermissionsUtils
 class ConcertsActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var recyclerView: RecyclerView
+    private lateinit var noEventsFoundLabel: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_events)
+        noEventsFoundLabel = findViewById(R.id.no_events_found_label)
+
+        recyclerView = findViewById(R.id.events_list)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         if (PermissionsUtils.hasLocationPermission(this)) {
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -30,11 +39,6 @@ class ConcertsActivity : AppCompatActivity() {
         } else {
             requestLocationPermission()
         }
-
-        setContentView(R.layout.activity_events)
-
-        recyclerView = findViewById(R.id.events_list)
-        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     private fun getSortedEvents(events: ArrayList<Event>) : ArrayList<Event> {
@@ -77,8 +81,16 @@ class ConcertsActivity : AppCompatActivity() {
         var artists = AppRepository.getArtists()
         var latlong = getLatLong(location)
 
+        noEventsFoundLabel.visibility = View.VISIBLE
+        recyclerView.visibility = View.INVISIBLE
+
         for (artist in artists) {
             TMApiWrapper.getInstance().getEventsFromArtist(latlong, artist) { events: ArrayList<Event> ->
+                if (events.size > 0) {
+                    noEventsFoundLabel.visibility = View.VISIBLE
+                    recyclerView.visibility = View.INVISIBLE
+                }
+
                 currentEvents.addAll(events)
                 val adapter = EventsAdapter(getSortedEvents(currentEvents))
                 recyclerView.adapter = adapter

@@ -6,11 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".activities.ConcertsActivity">
 
+    <TextView
+        android:id="@+id/no_events_found_label"
+        android:text="No events were found :/\nAdd more artists or increase the radius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav_container"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/events_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
+        android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
