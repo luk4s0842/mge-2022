@@ -28,19 +28,23 @@ tbd
 			<td>9 / 9 (Da 3 Teammitglieder)</td>
 		</tr>
 		<tr>
-			<td>Funktionalität (pro Funktion / Screen)</td>
-			<td>4 - 5 / 5</td>
+			<td>Funktionalität: Künstler suchen / hinzufügen / löschen</td>
+			<td>5 / 5</td>
+		</tr>
+		<tr>
+			<td>Funktionalität: Suchradius für Events konfigurierbar</td>
+			<td>3 / 5</td>
 		</tr>
 		<tr>
 			<td>Persistenz</td>
-			<td>1 - 2 / 3 (Nur Artists werden persistent gehalten)</td>
+			<td>3 / 3 (Nur Artists werden persistent gehalten)</td>
 		</tr>
 		<tr>
 			<td>Verwendung von Webservices</td>
 			<td>3 / 3</td>
 		</tr>
 		<tr>
-			<td>Ressourcen: Lokalisierung</td>
+			<td>Verwendung von Aktoren oder Sensoren: Geolocation</td>
 			<td>2 / 2</td>
 		</tr>
 		<tr>
@@ -48,12 +52,24 @@ tbd
 			<td>2 / 2</td>
 		</tr>
 		<tr>
-			<td>Verwendung von Jetpack-Komponenten</td>
+			<td>Jetpack-Komponente: RecyclerView</td>
+			<td>3 / 3</td>
+		</tr>
+		<tr>
+			<td>Jetpack-Komponente: SearchView</td>
+			<td>3 / 3</td>
+		</tr>
+		<tr>
+			<td>Jetpack-Komponente: Room</td>
 			<td>3 / 3</td>
 		</tr>
 		<tr>
 			<td>Integration von Drittkomponenten</td>
-			<td>2 - 3 / 3 (Wurde für API eine dritt Api genutzt)</td>
+			<td>2 / 3</td>
 		</tr>	
+		<tr>
+			<td>Gesamtpunkzahl</td>
+			<td>38</td>
+		</tr>
 	</tbody>
 </table>
