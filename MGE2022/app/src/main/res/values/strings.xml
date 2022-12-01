@@ -11,4 +11,6 @@
     <string name="dark_mode_setting_id">dark_mode</string>
     <string name="name">name</string>
     <string name="description">description</string>
+    <string name="no_artists_added_yet">No artists added yet</string>
+    <string name="no_search_results">No search results</string>
 </resources>

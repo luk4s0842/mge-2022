@@ -3,6 +3,8 @@ package com.habeggerdomeisenjoos.mge_2022.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,15 +16,24 @@ import com.habeggerdomeisenjoos.mge_2022.model.AppRepository
 import com.habeggerdomeisenjoos.mge_2022.model.Artist
 
 class ArtistsActivity : AppCompatActivity() {
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var noArtistsExistentLabel: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_artists)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.artists_list)
+        recyclerView = findViewById(R.id.artists_list)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        noArtistsExistentLabel = findViewById(R.id.artists_empty_artists_label)
+
         val artistsList: ArrayList<Artist> = AppRepository.getArtists()
+
+        if (artistsList.isNotEmpty()) {
+            recyclerView.visibility = View.VISIBLE
+            noArtistsExistentLabel.visibility = View.INVISIBLE
+        }
 
         val adapter = ArtistsAdapter(artistsList)
         recyclerView.adapter = adapter
@@ -48,6 +59,11 @@ class ArtistsActivity : AppCompatActivity() {
 
                 AppRepository.deleteArtist(deletedArtist)
                 artistsList.removeAt(position)
+
+                if (artistsList.isEmpty()) {
+                    recyclerView.visibility = View.INVISIBLE
+                    noArtistsExistentLabel.visibility = View.VISIBLE
+                }
 
                 adapter.notifyItemRemoved(position)
             }

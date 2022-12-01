@@ -25,7 +25,7 @@ tbd
 	<tbody>
 		<tr>
 			<td>Verwendung von Kotlin statt Java</td>
-			<td>9 / 9 (Da 3 Teammitglieder)</td>
+			<td>9 / 9 (3 Teammitglieder)</td>
 		</tr>
 		<tr>
 			<td>Funktionalität: Künstler suchen / hinzufügen / löschen</td>
@@ -37,7 +37,7 @@ tbd
 		</tr>
 		<tr>
 			<td>Persistenz</td>
-			<td>3 / 3 (Nur Artists werden persistent gehalten)</td>
+			<td>3 / 3</td>
 		</tr>
 		<tr>
 			<td>Verwendung von Webservices</td>
@@ -68,7 +68,7 @@ tbd
 			<td>2 / 3</td>
 		</tr>	
 		<tr>
-			<td>Gesamtpunkzahl</td>
+			<td>Gesamtpunktzahl</td>
 			<td>38</td>
 		</tr>
 	</tbody>
