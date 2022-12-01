@@ -1,7 +1,7 @@
 # Unsere App für das Testat in MGE
 
-## Idee
-Die App soll anstehende Konzerte von eigenen Lieblingskünstlern in einem definierten Umkreis anzeigen.
+## Beschreibung
+Die App zeigt anstehende Konzerte von favorisierten Künstlern des Benutzers, in einem definierten Umkreis an.
 
 ## Funktionen
 - Künstler zu Favoritenliste hinzufügen / entfernen
