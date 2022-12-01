@@ -87,8 +87,8 @@ class ConcertsActivity : AppCompatActivity() {
         for (artist in artists) {
             TMApiWrapper.getInstance().getEventsFromArtist(latlong, artist) { events: ArrayList<Event> ->
                 if (events.size > 0) {
-                    noEventsFoundLabel.visibility = View.VISIBLE
-                    recyclerView.visibility = View.INVISIBLE
+                    noEventsFoundLabel.visibility = View.INVISIBLE
+                    recyclerView.visibility = View.VISIBLE
                 }
 
                 currentEvents.addAll(events)
