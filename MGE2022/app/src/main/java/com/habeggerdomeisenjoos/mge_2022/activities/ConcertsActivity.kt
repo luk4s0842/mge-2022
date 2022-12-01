@@ -75,8 +75,10 @@ class ConcertsActivity : AppCompatActivity() {
     private fun loadEventsByLocation(location: Location?) {
         var currentEvents = ArrayList<Event>()
         var artists = AppRepository.getArtists()
+        var latlong = getLatLong(location)
+
         for (artist in artists) {
-            TMApiWrapper.getInstance().getEventsFromArtist(getLatLong(location), artist) { events: ArrayList<Event> ->
+            TMApiWrapper.getInstance().getEventsFromArtist(latlong, artist) { events: ArrayList<Event> ->
                 currentEvents.addAll(events)
                 val adapter = EventsAdapter(getSortedEvents(currentEvents))
                 recyclerView.adapter = adapter
