@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import com.google.android.material.slider.Slider
 import com.habeggerdomeisenjoos.mge_2022.R
-import com.habeggerdomeisenjoos.mge_2022.SettingsHandler
+import com.habeggerdomeisenjoos.mge_2022.services.SettingsHandler
 
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

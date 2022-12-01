@@ -1,7 +1,8 @@
-package com.habeggerdomeisenjoos.mge_2022
+package com.habeggerdomeisenjoos.mge_2022.services
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import com.habeggerdomeisenjoos.mge_2022.R
 
 class SettingsHandler private constructor() {
     companion object {

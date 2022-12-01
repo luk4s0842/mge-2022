@@ -1,4 +1,4 @@
-package com.habeggerdomeisenjoos.mge_2022
+package com.habeggerdomeisenjoos.mge_2022.services
 
 import android.content.Context
 import com.android.volley.Request
@@ -92,7 +92,9 @@ class TMApiWrapper { // static class or singleton
             }
 
             val artists = ArrayList<Artist>()
-            val artistsJSON = response.getJSONObject(API_RESPONSE_EMBEDDED).getJSONArray(API_RESPONSE_ATTRACTIONS)
+            val artistsJSON = response.getJSONObject(API_RESPONSE_EMBEDDED).getJSONArray(
+                API_RESPONSE_ATTRACTIONS
+            )
 
             for (i in 0 until artistsJSON.length()) {
                 try {
@@ -196,7 +198,9 @@ class TMApiWrapper { // static class or singleton
         params.putAll(getEventParams())
         makeRequest(API_RESOURCE_EVENTS, params) { response ->
             if (hasElements(response)) {
-                val eventsJson = response.getJSONObject(API_RESPONSE_EMBEDDED).getJSONArray(API_RESPONSE_EVENTS)
+                val eventsJson = response.getJSONObject(API_RESPONSE_EMBEDDED).getJSONArray(
+                    API_RESPONSE_EVENTS
+                )
                 callback(eventsJson)
             }
         }

@@ -30,7 +30,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/bottom_nav_container"
-        android:name="com.habeggerdomeisenjoos.mge_2022.activities.BottomNavigationFragment"
+        android:name="com.habeggerdomeisenjoos.mge_2022.fragments.BottomNavigationFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

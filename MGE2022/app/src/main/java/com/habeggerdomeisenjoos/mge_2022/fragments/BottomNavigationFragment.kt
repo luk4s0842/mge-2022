@@ -1,4 +1,4 @@
-package com.habeggerdomeisenjoos.mge_2022.activities
+package com.habeggerdomeisenjoos.mge_2022.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.habeggerdomeisenjoos.mge_2022.R
+import com.habeggerdomeisenjoos.mge_2022.activities.ArtistsActivity
+import com.habeggerdomeisenjoos.mge_2022.activities.ConcertsActivity
+import com.habeggerdomeisenjoos.mge_2022.activities.SettingsActivity
 
 /**
  * A simple [Fragment] subclass.

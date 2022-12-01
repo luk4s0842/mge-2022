@@ -8,7 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.habeggerdomeisenjoos.mge_2022.R
-import com.habeggerdomeisenjoos.mge_2022.TMApiWrapper
+import com.habeggerdomeisenjoos.mge_2022.services.TMApiWrapper
 import com.habeggerdomeisenjoos.mge_2022.adapter.SearchResultsAdapter
 import com.habeggerdomeisenjoos.mge_2022.model.Artist
 

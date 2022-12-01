@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.habeggerdomeisenjoos.mge_2022.R
-import com.habeggerdomeisenjoos.mge_2022.TMApiWrapper
+import com.habeggerdomeisenjoos.mge_2022.services.TMApiWrapper
 import com.habeggerdomeisenjoos.mge_2022.adapter.EventsAdapter
 import com.habeggerdomeisenjoos.mge_2022.model.AppRepository
 import com.habeggerdomeisenjoos.mge_2022.model.Event
